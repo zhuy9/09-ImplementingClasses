@@ -50,6 +50,8 @@ class Point(object):
         self.rem = 0
         self.startx = a
         self.starty = b
+        self.distance1 = 0
+        self.distance2 = 0
 
     def __repr__(self):
         return "Point({},{})".format(self.x, self.y)
@@ -61,11 +63,13 @@ class Point(object):
         self.x = a
         self.y = b
         self.rem += 1
+        self.distance1 += math.sqrt((self.x-a)**2 + (self.y-b)**2)
 
     def move_by(self, a, b):
         self.x = self.x + a
         self.y = self.y + b
         self.rem += 1
+        self.distance2 = math.sqrt(a ** 2 + b ** 2) + self.distance2
 
     def get_number_of_moves_made(self):
         return self.rem
@@ -82,9 +86,7 @@ class Point(object):
         return math.sqrt(a + b)
 
     def get_distance_traveled(self):
-        c = (self.x - self.startx)
-        d = (self.y - self.starty)
-        return c + d
+        return self.distance1 + self.distance2
 
     def closer_to(self, p2, p3):
         if math.sqrt((self.x-p2.x)**2+(self.y-p2.y)**2)<= math.sqrt((self.x-p3.x)**2+(self.y-p3.y)**2):
