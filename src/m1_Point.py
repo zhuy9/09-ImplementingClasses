@@ -60,16 +60,17 @@ class Point(object):
         return Point(self.x, self.y)
 
     def move_to(self, a, b):
+        self.distance1 += math.sqrt((self.x -a) ** 2 + (self.y - b) ** 2)
         self.x = a
         self.y = b
         self.rem += 1
-        self.distance1 += math.sqrt((self.x-a)**2 + (self.y-b)**2)
+
 
     def move_by(self, a, b):
         self.x = self.x + a
         self.y = self.y + b
         self.rem += 1
-        self.distance2 = math.sqrt(a ** 2 + b ** 2) + self.distance2
+        self.distance2 += math.sqrt(a ** 2 + b ** 2)
 
     def get_number_of_moves_made(self):
         return self.rem
